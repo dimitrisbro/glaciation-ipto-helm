@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ipto-job
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL: https://github.com/dimitrisbro/glaciation-ipto-helm.git
+    targetRevision: HEAD
+    path: ipto-cron-helm
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ipto-uc4
