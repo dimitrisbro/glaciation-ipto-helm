@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hostpath-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: job-container
+        image: {{.Values.image.repository}}
+#        imagePullPolicy: Never
+        #command: ["sh", "-c", "echo 'Hello from hostPath 1'; cat /mnt/hostpath1/test.txt; echo 'Hello from hostPath 2'; cat /mnt/hostpath2/test.txt; sleep 60"]
+        volumeMounts:
+        - name: input-volume
+          mountPath: /glacipto/input_folder
+        - name: output-volume
+          mountPath: /glacipto/output_folder
+      volumes:
+      - name: input-volume
+        hostPath:
+          path: /home/ubuntu/GLACIPTO-use-case/input_folder    # Change this to the desired host path on your master node
+          type: DirectoryOrCreate   # Create the directory if it doesn't exist
+      - name: output-volume
+        hostPath:
+          path: /home/ubuntu/GLACIPTO-use-case/output_folder    # Change this to the desired host path on your master node
+          type: DirectoryOrCreate   # Create the directory if it doesn't exist
+      restartPolicy: Never
+      # Add node selector to schedule this Job on the master node
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""

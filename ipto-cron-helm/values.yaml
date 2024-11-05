@@ -1,0 +1,10 @@
+image:
+  repository:  ghcr.io/dimitrisbro/valimage
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+schedule: "* */2 * * *"
+
+
+
+

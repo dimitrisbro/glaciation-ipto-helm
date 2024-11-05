@@ -1,0 +1,8 @@
+image:
+  repository:  ghcr.io/dimitrisbro/testimage
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+
+
+
