@@ -4,7 +4,7 @@ metadata:
   name: ipto-job
   namespace: ipto-uc4
 spec:
-  schedule: {{.Values.schedule}}
+  schedule: {{.Values.schedule | quote}}
   jobTemplate:
     spec:
       template:
